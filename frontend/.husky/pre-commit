@@ -3,4 +3,4 @@
 
 cd frontend
 npm run build
-#npm test
+CI=true npm test
