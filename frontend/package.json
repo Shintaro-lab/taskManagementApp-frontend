@@ -1,0 +1,84 @@
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "main": "public/electron.mjs",
+  "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.15.10",
+    "@mui/material": "^5.15.10",
+    "@testing-library/jest-dom": "^6.4.2",
+    "@testing-library/react": "^14.2.2",
+    "@testing-library/user-event": "^14.5.2",
+    "react": "^18.2.0",
+    "react-beautiful-dnd": "^13.1.1",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.22.0",
+    "react-scripts": "5.0.1",
+    "styled-components": "^6.1.8",
+    "styled-reset": "^4.5.2",
+    "uuid": "^9.0.1",
+    "web-vitals": "^2.1.4"
+  },
+  "build": {
+    "appId": "com.product.tm",
+    "productName": "taskManagementApp",
+    "win": {
+      "target": "portable"
+    },
+    "files": [
+      "build/**/*",
+      "build/electron.mjs"
+    ],
+    "extraMetadata": {
+      "main": "build/electron.mjs"
+    },
+    "extends": null
+  },
+  "scripts": {
+    "react-start": "cross-env BROWSER=none react-scripts start",
+    "electron-start": "wait-on http://localhost:3000 && electron .",
+    "electron-build": "electron-builder",
+    "start-app": "run-p react-start electron-start",
+    "build-app": "run-s build electron-build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "prepare": "cd .. && husky install frontend/.husky"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "./src/index.js",
+      "./src/App.js"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@types/jest": "^29.5.12",
+    "cross-env": "^7.0.3",
+    "electron": "^29.1.4",
+    "electron-builder": "^24.13.3",
+    "husky": "^8.0.0",
+    "wait-on": "^7.2.0"
+  }
+}
