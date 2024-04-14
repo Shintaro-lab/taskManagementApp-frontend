@@ -10,6 +10,7 @@ const Container = styled.div`
   min-height: 7vh;
   border-radius: 2%;
   position: relative;
+  margin-bottom: 0.5vh;
 `;
 
 const TaskContainer = styled.p`
