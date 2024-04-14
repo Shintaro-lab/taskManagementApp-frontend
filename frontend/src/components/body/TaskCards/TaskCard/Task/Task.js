@@ -7,7 +7,7 @@ const Container = styled.div`
   display: flex;
   box-shadow: 1px 1px 1px 1px rgb(75,75,75);
   background-color: white;
-  height: 7vh;
+  min-height: 7vh;
   border-radius: 2%;
   position: relative;
 `;
@@ -15,10 +15,15 @@ const Container = styled.div`
 const TaskContainer = styled.p`
   margin-left: 1vw;
   margin-top: 1vh;
+  width: 12vw;
+  overflow-wrap: anywhere;
 `;
 
 const Input = styled.input`
-  width: 10vw;
+  margin-left: 1vw;
+  margin-top: 1vh;
+  width: 12vw;
+  overflow-wrap: anywhere;
   border: none;
   outline: none;
 `;
@@ -75,7 +80,6 @@ export function Task({task,taskList,setTaskCardList,index,taskCardList,taskCardI
                   onChange={changeTaskName}
                   onBlur={finishTaskNameChange}
                   value={task.name}
-                  maxLength="10"
                 />
               </form>
             ): 
