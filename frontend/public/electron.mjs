@@ -8,7 +8,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 let api_path = process.argv[2];
-let children = spawn('demo.exe',{cwd:api_path,shell: true});
+let children = spawn('tm.exe',{cwd:api_path,shell: true});
 
 function createWindow() {
     const mainWindow = new BrowserWindow({
