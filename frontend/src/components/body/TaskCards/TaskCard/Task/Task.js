@@ -16,7 +16,7 @@ const Container = styled.div`
 const TaskContainer = styled.p`
   margin-left: 1vw;
   margin-top: 1vh;
-  width: 12vw;
+  width: 11vw;
   overflow-wrap: anywhere;
 `;
 

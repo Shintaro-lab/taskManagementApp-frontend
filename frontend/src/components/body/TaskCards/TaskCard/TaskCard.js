@@ -13,6 +13,7 @@ const Container = styled.div`
 const DroppableContainer = styled.div`
   background-color: gray;
   height: 70vh;
+  overflow-y: auto;
 `;
 
 export function TaskCard({taskList,setTaskCardList,taskCardId,taskCardList,taskCardIndex}) {
@@ -25,6 +26,7 @@ export function TaskCard({taskList,setTaskCardList,taskCardId,taskCardList,taskC
         {(provided) => {
           return (
             <DroppableContainer
+              data-testid="DroppableContainerInTaskCard"
               ref={provided.innerRef}
               {...provided.droppableProps}
             >

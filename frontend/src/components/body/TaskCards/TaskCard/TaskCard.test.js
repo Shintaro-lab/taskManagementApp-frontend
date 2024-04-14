@@ -45,4 +45,17 @@ describe('TaskCard', () => {
         expect(task).toBeInTheDocument();
 
     });
+
+    test('DroppableContainer has scroll bar', () => {
+        render(
+            <DragDropContext>
+                <TaskCard taskList={taskList} setTaskCardList={setTaskCardList} 
+                taskCardId={taskCardId} taskCardList={taskCardList} taskCardIndex={taskCardIndex}/>
+            </DragDropContext>
+        );
+
+        const droppableContainer = screen.getByTestId('DroppableContainerInTaskCard');
+        const style = window.getComputedStyle(droppableContainer);
+        expect(style.overflowY).toBe('auto');
+    });
 });
