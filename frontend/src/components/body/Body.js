@@ -15,7 +15,7 @@ export default function Body() {
   const [taskCardList,setTaskCardList] = useState([]);
 
   async function getLatestData() {
-    const response = await fetch('http://localhost:8080/demo/getLatestData');
+    const response = await fetch('http://localhost:8080/tm/getLatestData');
     const data = await response.json();
     return setTaskCardList(data);
   }  
@@ -34,7 +34,7 @@ export default function Body() {
         body: JSON.stringify(taskCardList)
       };
 
-      fetch('http://localhost:8080/demo/updateData', requestOptions)
+      fetch('http://localhost:8080/tm/updateData', requestOptions)
     }
     
   },[taskCardList]);
