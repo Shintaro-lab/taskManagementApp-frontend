@@ -21,7 +21,7 @@ export function Title({taskCardList, setTaskCardList, taskCardId,taskCardIndex})
       ...taskCardList
     ]
 
-    newTaskCardList[taskCardIndex] = {id: taskCardId, title: event.target.value, taskList: taskCardList[taskCardIndex].taskList}
+    newTaskCardList[taskCardIndex] = {id: taskCardId, title: event.target.value, taskIdList: taskCardList[taskCardIndex].taskIdList}
     setTaskCardList(newTaskCardList);
   }
 

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { DeleteFromTaskCardList, DeleteFromTaskList } from "../../../../../common/DeleteTaskUtil/DeleteTaskUtil";
 
 const Container = styled.div`
   position: absolute;
@@ -8,22 +9,26 @@ const Container = styled.div`
   bottom: 0;
 `;
 
-export function DeleteTaskButton({taskCardList,setTaskCardList,taskCardId,taskList,index}) {
+export function DeleteTaskButton({taskCardList,setTaskCardList,taskIdList,index,taskList,setTaskList}) {
 
   const deleteTask = () => {
 
-    const newTaskList = Array.from(taskList);
-    newTaskList.splice(index,1);
+    let bufferList = [];
+    let deletedList = [];
 
-    const newTaskCardList = Array.from(taskCardList);
+    const newTaskIdList = Array.from(taskIdList);
+    const deleteTaskID = newTaskIdList.splice(index,1);
 
-    for (let i=0; i<taskCardList.length; i++) {
-      if (taskCardList[i].id === taskCardId) {
-        
-        newTaskCardList[i] = {id: taskCardId, title: newTaskCardList[i].title, taskList: newTaskList};
-        setTaskCardList(newTaskCardList);
-      }
+    bufferList = [...bufferList,...deleteTaskID];
+
+    while (bufferList.length > 0) {
+
+      deletedList = [...deletedList,...bufferList];
+      [bufferList,taskList] = DeleteFromTaskList(setTaskList,taskList,bufferList);
     }
+
+    DeleteFromTaskCardList(setTaskCardList,taskCardList,deletedList);
+
   }
 
   return (

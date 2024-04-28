@@ -8,34 +8,45 @@ jest.mock('uuid', () => {
 
 describe('NewTask', () => {
     let taskList;
+    let setTaskList;
     let setTaskCardList;
     let taskCardList;
+    let taskCardId;
+    let taskIdList;
 
     const user = userEvent.setup();
 
     beforeEach(() => {
         taskList = [];
+        setTaskList = jest.fn();
         setTaskCardList = jest.fn();
-        taskCardList = [{
-            id: 'card-1',
-            title: 'title',
-            taskList: ['task1']
-        },
-        {
-            id: 'card-2',
-            title: 'title',
-            taskList: []
-        }];
+        taskCardList = [
+            {
+                id: 'card-1',
+                title: 'title',
+                taskIdList: []
+            },
+            {
+                id: 'card-2',
+                title: 'title',
+                taskIdList: []
+            }
+        ];
+        taskCardId = 'card-1';
+        taskIdList = [];
     });
 
     test('renders input area',() => {
-        render(<NewTask taskList={[]} setTaskCardList={() => {}} taskCardId="card-1" taskCardList={[]} />);
+        render(<NewTask taskCardId={taskCardId} taskCardList={taskCardList} setTaskCardList={setTaskCardList}
+            taskList={taskList} setTaskList={setTaskList} taskIdList={taskIdList} />);
         const input = screen.getByPlaceholderText('Add a new task');
         expect(input).toBeInTheDocument();
     });
 
     test('add a new task when submitted', async () => {
-        render(<NewTask taskList={taskList} setTaskCardList={setTaskCardList} taskCardId="card-1" taskCardList={taskCardList} />);
+        render(<NewTask taskCardId={taskCardId} taskCardList={taskCardList} setTaskCardList={setTaskCardList}
+            taskList={taskList} setTaskList={setTaskList} taskIdList={taskIdList} />);
+        
         const input = screen.getByRole('textbox');
 
         await user.type(input, 'New Task');
@@ -47,15 +58,23 @@ describe('NewTask', () => {
                 {
                     id: 'card-1',
                     title: 'title',
-                    taskList: [{
-                        id: 'mock-uuid',
-                        name:'New Task'
-                    }]
+                    taskIdList: ['mock-uuid']
                 },
                 {
                     id: 'card-2',
                     title: 'title',
-                    taskList: []
+                    taskIdList: []
+                }
+            ]
+        );
+
+        expect(setTaskList).toHaveBeenCalledWith(
+            [
+                {
+                    id: 'mock-uuid',
+                    name: 'New Task',
+                    parentTaskId: '',
+                    childrenTaskIdList: []
                 }
             ]
         );

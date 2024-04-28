@@ -7,7 +7,7 @@ const Container = styled.div`
   gap: 5vw;
 `;
 
-export function TaskCards({taskCardList, setTaskCardList}) {
+export function TaskCards({taskCardList, setTaskCardList,setOpenDrawer,taskList,setTaskList,setSelectedTaskIDByOpenDrawer}) {
 
   const handleOnDragEnd = (result) => {
 
@@ -18,12 +18,14 @@ export function TaskCards({taskCardList, setTaskCardList}) {
     if (result.type !== "taskCards") {
   
       if (result.destination.droppableId === result.source.droppableId) {
-  
+
         const newTaskCard = taskCardList.find((taskCard) => taskCard.id === result.source.droppableId);
-        const newTaskList = Array.from(newTaskCard.taskList);
+        const newTaskIdList = Array.from(newTaskCard.taskIdList);
   
-        const targetTask = newTaskList.splice(result.source.index, 1);
-        newTaskList.splice(result.destination.index,0,targetTask[0]);
+        const targetTaskId = newTaskIdList.splice(result.source.index, 1);
+        newTaskIdList.splice(result.destination.index,0,targetTaskId[0]);
+
+        
   
         const newTaskCardList = [
           ...taskCardList
@@ -31,20 +33,21 @@ export function TaskCards({taskCardList, setTaskCardList}) {
   
         for (let i=0; i<newTaskCardList.length; i++) {
           if (newTaskCardList[i].id === result.source.droppableId) {
-            newTaskCardList[i] = {id: result.source.droppableId,title: newTaskCardList[i].title,taskList: newTaskList}
+            newTaskCardList[i] = {id: result.source.droppableId,title: newTaskCardList[i].title,taskIdList: newTaskIdList}
           }
         }
+
         setTaskCardList(newTaskCardList);
   
       } else {
   
         const sourceTaskCard = taskCardList.find((taskCard) => taskCard.id === result.source.droppableId);
-        const sourceTaskList = Array.from(sourceTaskCard.taskList);
-        const targetTask = sourceTaskList.splice(result.source.index, 1);
+        const sourceTaskIdList = Array.from(sourceTaskCard.taskIdList);
+        const targetTaskId = sourceTaskIdList.splice(result.source.index, 1);
   
         const destinationTaskCard = taskCardList.find((taskCard) => taskCard.id === result.destination.droppableId);
-        const destinationTaskList = Array.from(destinationTaskCard.taskList);
-        destinationTaskList.splice(result.destination.index,0,targetTask[0]);
+        const destinationTaskIdList = Array.from(destinationTaskCard.taskIdList);
+        destinationTaskIdList.splice(result.destination.index,0,targetTaskId[0]);
   
         const newTaskCardList = [
           ...taskCardList
@@ -52,11 +55,11 @@ export function TaskCards({taskCardList, setTaskCardList}) {
   
         for (let i=0; i<newTaskCardList.length; i++) {
           if (newTaskCardList[i].id === result.source.droppableId) {
-            newTaskCardList[i] = {id: result.source.droppableId, title: newTaskCardList[i].title,taskList: sourceTaskList}
+            newTaskCardList[i] = {id: result.source.droppableId, title: newTaskCardList[i].title,taskIdList: sourceTaskIdList}
           }
 
           if (newTaskCardList[i].id === result.destination.droppableId) {
-            newTaskCardList[i] = {id: result.destination.droppableId, title: newTaskCardList[i].title, taskList: destinationTaskList}
+            newTaskCardList[i] = {id: result.destination.droppableId, title: newTaskCardList[i].title, taskIdList: destinationTaskIdList}
           }
         }
   
@@ -93,7 +96,9 @@ export function TaskCards({taskCardList, setTaskCardList}) {
                         >
                           <TaskCard
                             key={taskCard.id} taskCardId={taskCard.id} 
-                            taskList={taskCard.taskList} setTaskCardList={setTaskCardList} taskCardList={taskCardList} taskCardIndex={index}
+                            taskIdList={taskCard.taskIdList} setTaskCardList={setTaskCardList} taskCardList={taskCardList} 
+                            taskCardIndex={index} setOpenDrawer={setOpenDrawer} taskList={taskList} setTaskList={setTaskList}
+                            setSelectedTaskIDByOpenDrawer={setSelectedTaskIDByOpenDrawer}
                           />
                         </div>
                       );

@@ -17,7 +17,7 @@ describe('AddTaskCardsButton', () => {
       {
         id: 'card-1',
         title: 'title',
-        taskList: []
+        taskIdList: []
       }
     ];
     setTaskCardList = jest.fn();
@@ -40,7 +40,7 @@ describe('AddTaskCardsButton', () => {
       {
         id: 'card-mock-uuid',
         title: 'title',
-        taskList: []
+        taskIdList: []
       }
     ]);
   });

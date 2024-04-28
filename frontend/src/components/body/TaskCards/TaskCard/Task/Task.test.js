@@ -5,20 +5,33 @@ import { act, fireEvent, render, screen} from '@testing-library/react';
 describe('Task Test', () => {
     let task;
     let taskList;
+    let setTaskList;
     let setTaskCardList;
     let index;
     let taskCardList;
     let taskCardId;
-    let handleDragEnd;
+    let setOpenDrawer;
+    let setSelectedTaskIDByOpenDrawer;
+    let parentTaskName;
+    let taskIdList;
 
     beforeEach(() => {
-        task = {id: "1", name: "Task 1"};
-        taskList = [{id: "1", name: "Task 1"}, {id: "2", name: "Task 2"}];
+        task = {id: "1", name: "Task 1", parentTaskId: "2", childrenTaskIdList: []};
+        taskList = [{id: "1", name: "Task 1", parentTaskId:"2", childrenTaskIdList:[]}, 
+            {id: "2", name: "Task 2", parentTaskId:"", childrenTaskIdList:["1"]}];
+        setTaskList = jest.fn();
+
         setTaskCardList = jest.fn();
-        handleDragEnd = jest.fn();
+        
         index = 0;
-        taskCardList = [{id: "1", title: "Task Card 1", taskList: taskList}];
-        taskCardId = "1";
+        taskCardList = [{id: "card-1", title: "Task Card 1", taskIdList: ["1", "2"]}];
+        taskCardId = "card-1";
+
+        setOpenDrawer = jest.fn();
+        setSelectedTaskIDByOpenDrawer = jest.fn();
+        parentTaskName = "Task 2";
+        taskIdList = ["1", "2"];
+        setTaskList = jest.fn();
     });
     
     test('render Task', () => {
@@ -29,8 +42,10 @@ describe('Task Test', () => {
                         return (
                             <div ref={provided.innerRef}
                             {...provided.droppableProps}>
-                                <Task task={task} taskList={taskList}
-                                setTaskCardList={setTaskCardList} index={index} taskCardList={taskCardList} taskCardId={taskCardId}/>
+                                <Task task={task} taskIdList={taskIdList} setTaskList={setTaskList}
+                                setTaskCardList={setTaskCardList} index={index} taskCardList={taskCardList} 
+                                taskCardId={taskCardId} taskList={taskList} setOpenDrawer={setOpenDrawer}
+                                setSelectedTaskIDByOpenDrawer={setSelectedTaskIDByOpenDrawer} parentTaskName={parentTaskName}/>
                             </div>
                         );
                     }}
@@ -41,8 +56,14 @@ describe('Task Test', () => {
         const taskName = screen.getByText(task.name);
         expect(taskName).toBeInTheDocument();
 
+        const parentTaskNameElement = screen.getByText(parentTaskName);
+        expect(parentTaskNameElement).toBeInTheDocument();
+
         const deleteTaskButton = screen.getByRole('button', {name: 'delete'});
         expect(deleteTaskButton).toBeInTheDocument();
+
+        const openDrawerButton = screen.getByRole('button', {name: 'openDrawer'});
+        expect(openDrawerButton).toBeInTheDocument();
     });
 
     test('change task name with blur', async () => {
@@ -53,8 +74,10 @@ describe('Task Test', () => {
                         return (
                             <div ref={provided.innerRef}
                             {...provided.droppableProps}>
-                                <Task task={task} taskList={taskList}
-                                setTaskCardList={setTaskCardList} index={index} taskCardList={taskCardList} taskCardId={taskCardId}/>
+                                <Task task={task} taskIdList={taskIdList} setTaskList={setTaskList}
+                                setTaskCardList={setTaskCardList} index={index} taskCardList={taskCardList} 
+                                taskCardId={taskCardId} taskList={taskList} setOpenDrawer={setOpenDrawer}
+                                setSelectedTaskIDByOpenDrawer={setSelectedTaskIDByOpenDrawer} parentTaskName={parentTaskName}/>
                             </div>
                         );
                     }}
@@ -65,13 +88,11 @@ describe('Task Test', () => {
         fireEvent.click(screen.getByText(task.name));
         fireEvent.change(screen.getByRole('textbox'), { target: { value: 'Task 1 changed' } });
         fireEvent.blur(screen.getByRole('textbox'));
-        expect(setTaskCardList).toHaveBeenCalledWith(
+
+        expect(setTaskList).toHaveBeenCalledWith(
             [
-                {
-                    id: '1',
-                    title: 'Task Card 1',
-                    taskList: [{id: "1", name: "Task 1 changed"}, {id: "2", name: "Task 2"}]
-                }
+                {id: "1", name: "Task 1 changed", parentTaskId:"2", childrenTaskIdList:[]}, 
+                {id: "2", name: "Task 2", parentTaskId:"", childrenTaskIdList:["1"]}
             ]
         );
         
@@ -85,8 +106,10 @@ describe('Task Test', () => {
                         return (
                             <div ref={provided.innerRef}
                             {...provided.droppableProps}>
-                                <Task task={task} taskList={taskList}
-                                setTaskCardList={setTaskCardList} index={index} taskCardList={taskCardList} taskCardId={taskCardId}/>
+                                <Task task={task} taskIdList={taskIdList} setTaskList={setTaskList}
+                                setTaskCardList={setTaskCardList} index={index} taskCardList={taskCardList} 
+                                taskCardId={taskCardId} taskList={taskList} setOpenDrawer={setOpenDrawer}
+                                setSelectedTaskIDByOpenDrawer={setSelectedTaskIDByOpenDrawer} parentTaskName={parentTaskName}/>
                             </div>
                         );
                     }}
@@ -99,13 +122,11 @@ describe('Task Test', () => {
         fireEvent.change(input, { target: { value: 'Task 1 changed' } });
         const form = input.closest('form');
         fireEvent.submit(form);
-        expect(setTaskCardList).toHaveBeenCalledWith(
+
+        expect(setTaskList).toHaveBeenCalledWith(
             [
-                {
-                    id: '1',
-                    title: 'Task Card 1',
-                    taskList: [{id: "1", name: "Task 1 changed"}, {id: "2", name: "Task 2"}]
-                }
+                {id: "1", name: "Task 1 changed", parentTaskId:"2", childrenTaskIdList:[]}, 
+                {id: "2", name: "Task 2", parentTaskId:"", childrenTaskIdList:["1"]}
             ]
         );
     });

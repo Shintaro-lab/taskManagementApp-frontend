@@ -9,29 +9,36 @@ describe('TaskCard', () => {
     let taskCardId;
     let taskCardList;
     let taskCardIndex;
+    let setOpenDrawer;
+    let setTaskList;
+    let setSelectedTaskIDByOpenDrawer;
+    let taskIdList;
 
     beforeEach(() => {
         taskList = [
-            {id: "1", name: "Task 1"},
-            {id: "2", name: "Task 2"}
+            {id: "1", name: "Task 1", parentTaskId: "", childrenTaskIdList: []},
+            {id: "2", name: "Task 2", parentTaskId: "", childrenTaskIdList: []}
         ];
         setTaskCardList = jest.fn();
-        taskCardId = "1";
+        taskCardId = "card-1";
         taskCardList = [
-            {id: "1", title: "Task Card 1", taskList: [
-                {id: "1", name: "Task 1"},
-                {id: "2", name: "Task 2"}
-            ]},
-            {id: "2", title: "Task Card 2", taskList: []}
+            {id: "card-1", title: "Task Card 1", taskIdList: ["1","2"]},
+            {id: "card-2", title: "Task Card 2", taskIdList: []}
         ];
+        taskIdList = ["1","2"];
         taskCardIndex = 0;
+        setOpenDrawer = jest.fn();
+        setTaskList = jest.fn();
+        setSelectedTaskIDByOpenDrawer = jest.fn();
     });
 
     test('render TaskCard', () => {
         render(
             <DragDropContext>
-                <TaskCard taskList={taskList} setTaskCardList={setTaskCardList} 
-                taskCardId={taskCardId} taskCardList={taskCardList} taskCardIndex={taskCardIndex}/>
+                <TaskCard taskIdList={taskIdList} taskList={taskList} setTaskCardList={setTaskCardList} 
+                taskCardId={taskCardId} taskCardList={taskCardList} taskCardIndex={taskCardIndex} 
+                setOpenDrawer={setOpenDrawer} setTaskList={setTaskList} 
+                setSelectedTaskIDByOpenDrawer={setSelectedTaskIDByOpenDrawer}/>
             </DragDropContext>
         );
 
@@ -49,8 +56,10 @@ describe('TaskCard', () => {
     test('DroppableContainer has scroll bar', () => {
         render(
             <DragDropContext>
-                <TaskCard taskList={taskList} setTaskCardList={setTaskCardList} 
-                taskCardId={taskCardId} taskCardList={taskCardList} taskCardIndex={taskCardIndex}/>
+                <TaskCard taskIdList={taskIdList} taskList={taskList} setTaskCardList={setTaskCardList} 
+                taskCardId={taskCardId} taskCardList={taskCardList} taskCardIndex={taskCardIndex} 
+                setOpenDrawer={setOpenDrawer} setTaskList={setTaskList} 
+                setSelectedTaskIDByOpenDrawer={setSelectedTaskIDByOpenDrawer}/>
             </DragDropContext>
         );
 

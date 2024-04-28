@@ -19,25 +19,33 @@ const Input = styled.input`
   margin-top: 1vh;
 `;
 
-export function NewTask({taskList, setTaskCardList, taskCardId, taskCardList}) {
+export function NewTask({taskIdList, setTaskCardList, taskCardId, taskCardList, taskList, setTaskList}) {
 
   const [newTaskName, setNewTaskName] = useState("");
 
   function addTask(event) {
 
+    const id = uuid();
+
+    const newTaskIdList = [
+      ...taskIdList,
+      id
+    ];
+
     const newTaskList = [
       ...taskList,
-      {id: uuid(), name: event.target.children[0].value}
+      {id: id, name: event.target.children[0].value, parentTaskId: "", childrenTaskIdList: []}
     ];
 
     const newTaskCardList = Array.from(taskCardList);
     for (let i=0; i<taskCardList.length; i++) {
       if (taskCardList[i].id === taskCardId) {
-        newTaskCardList[i] = {id: taskCardId, title: newTaskCardList[i].title,taskList: newTaskList}
+        newTaskCardList[i] = {id: taskCardId, title: newTaskCardList[i].title,taskIdList: newTaskIdList}
       }
     }
 
     setTaskCardList(newTaskCardList);
+    setTaskList(newTaskList);
     setNewTaskName("");
   }
 

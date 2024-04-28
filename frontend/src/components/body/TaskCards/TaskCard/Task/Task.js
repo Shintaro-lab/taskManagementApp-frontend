@@ -2,12 +2,14 @@ import { DeleteTaskButton } from "./DeleteTaskButton/DeleteTaskButton";
 import styled from "styled-components";
 import { useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
+import { OpenDrawerButton } from "./OpenDrawerButton/OpenDrawerButton";
+import { Typography } from "@mui/material";
 
 const Container = styled.div`
   display: flex;
   box-shadow: 1px 1px 1px 1px rgb(75,75,75);
   background-color: white;
-  min-height: 7vh;
+  min-height: 10vh;
   border-radius: 2%;
   position: relative;
   margin-bottom: 0.5vh;
@@ -29,7 +31,17 @@ const Input = styled.input`
   outline: none;
 `;
 
-export function Task({task,taskList,setTaskCardList,index,taskCardList,taskCardId}) {
+const StyledTypography = styled(Typography)`
+  color: gray;
+  position: absolute;
+  bottom: 1vh;
+  left: 1vw;
+  width: 11vw;
+  overflow-wrap: anywhere;
+`;
+
+export function Task({task,taskIdList,setTaskCardList,index,taskCardList,taskCardId,setOpenDrawer,
+  taskList,setTaskList,setSelectedTaskIDByOpenDrawer,parentTaskName}) {
   const [changeStatus, setChangeStatus] = useState(false);
 
   const handleSubmit = (event) => {
@@ -44,20 +56,17 @@ export function Task({task,taskList,setTaskCardList,index,taskCardList,taskCardI
   const changeTaskName = (event) => {
     const newTaskList = taskList.map((taskItem) => {
       if (taskItem.id === task.id) {
-        return {id: task.id, name: event.target.value};
+        return {
+          id: task.id, 
+          name: event.target.value, 
+          parentTaskId: task.parentTaskId, 
+          childrenTaskIdList: task.childrenTaskIdList
+        };
       }
       return taskItem;
     });
 
-    const newTaskCardList = Array.from(taskCardList);
-
-    for (let i=0; i<taskCardList.length; i++) {
-      if (taskCardList[i].id === taskCardId) {
-        newTaskCardList[i] = {id: taskCardId, title: newTaskCardList[i].title, taskList: newTaskList}
-      }
-    }
-
-    setTaskCardList(newTaskCardList);
+    setTaskList(newTaskList);
   }
 
   const finishTaskNameChange = () => {
@@ -85,8 +94,17 @@ export function Task({task,taskList,setTaskCardList,index,taskCardList,taskCardI
               </form>
             ): 
             <TaskContainer onClick={handleTaskNameChange}>{task.name}</TaskContainer>}
+            <OpenDrawerButton setOpenDrawer={setOpenDrawer} setSelectedTaskIDByOpenDrawer={setSelectedTaskIDByOpenDrawer}
+              taskID={task.id}
+            />
             <DeleteTaskButton taskCardList={taskCardList} setTaskCardList={setTaskCardList} 
-              taskCardId={taskCardId} taskList={taskList} index={index}/>
+              taskCardId={taskCardId} taskIdList={taskIdList} index={index} taskList={taskList} setTaskList={setTaskList}/>
+            {parentTaskName !== "" ? (
+              <StyledTypography variant="string" component="p">
+                {parentTaskName}
+              </StyledTypography>
+            ): null
+            }
           </Container>
         );
       }}

@@ -7,11 +7,13 @@ const Container = styled.div`
   position: relative;
 `;
 
-export function TaskCardHeader({taskCardList, setTaskCardList, taskCardId, taskCardIndex}) {
+export function TaskCardHeader({taskCardList, setTaskCardList, taskCardId, taskCardIndex, taskList, setTaskList}) {
   return (
     <Container>
-      <Title taskCardList={taskCardList} setTaskCardList={setTaskCardList} taskCardId={taskCardId} taskCardIndex={taskCardIndex}/>
-      <DeleteTaskCard taskCardList={taskCardList} setTaskCardList={setTaskCardList} taskCardIndex={taskCardIndex}/>
+      <Title taskCardList={taskCardList} setTaskCardList={setTaskCardList} 
+        taskCardId={taskCardId} taskCardIndex={taskCardIndex} />
+      <DeleteTaskCard taskCardList={taskCardList} setTaskCardList={setTaskCardList} 
+        taskCardIndex={taskCardIndex} taskList={taskList} setTaskList={setTaskList}/>
     </Container>
   );
 }

@@ -9,8 +9,8 @@ describe('Title', () => {
 
     beforeEach(() => {
         taskCardList = [
-            {id: "1", title: "Task Card 1", taskList: []},
-            {id: "2", title: "Task Card 2", taskList: []}
+            {id: "1", title: "Task Card 1", taskIdList: []},
+            {id: "2", title: "Task Card 2", taskIdList: []}
         ];
         setTaskCardList = jest.fn();
         taskCardIndex = 0;
@@ -36,8 +36,8 @@ describe('Title', () => {
 
         expect(setTaskCardList).toHaveBeenCalledWith(
             [
-                {id: "1", title: "Task Card 1 changed", taskList: []},
-                {id: "2", title: "Task Card 2", taskList: []}
+                {id: "1", title: "Task Card 1 changed", taskIdList: []},
+                {id: "2", title: "Task Card 2", taskIdList: []}
             ]
         );
     });
@@ -53,8 +53,8 @@ describe('Title', () => {
 
         expect(setTaskCardList).toHaveBeenCalledWith(
             [
-                {id: "1", title: "Task Card 1 changed", taskList: []},
-                {id: "2", title: "Task Card 2", taskList: []}
+                {id: "1", title: "Task Card 1 changed", taskIdList: []},
+                {id: "2", title: "Task Card 2", taskIdList: []}
             ]
         );
     });

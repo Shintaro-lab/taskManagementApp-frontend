@@ -11,7 +11,7 @@ export function AddTaskCardsButton({taskCardList, setTaskCardList}) {
       {
         id: newId,
         title: "title",
-        taskList: []
+        taskIdList: []
       }
     ];
 
