@@ -8,7 +8,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 let api_path = process.argv[2];
-let children = spawn('tm.exe',{cwd:api_path,shell: true});
+let children = spawn('tm.exe',{cwd:api_path});
 
 function createWindow() {
     const mainWindow = new BrowserWindow({
@@ -44,12 +44,17 @@ app.whenReady().then(() => {
             createWindow();
         }
     })
-})
+});
 
 app.on('window-all-closed', function () {
     if (process.platform !== 'darwin') {
-        app.quit();
-        console.log('finish app');
-        spawn('taskkill',['/pid',children.pid,'/t','/f'],{shell: true});
+        
+        const killProcess = spawn('taskkill',['/pid',children.pid,'/t','/f'],{shell: true});
+
+        killProcess.on('close', (code) => {
+            console.log(`taskkill process exited with code ${code}`);
+            app.quit();
+        });
+        
     }
-})
+});
