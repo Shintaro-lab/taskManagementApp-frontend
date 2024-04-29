@@ -21,9 +21,9 @@ describe('DeleteSubTaskButton', () => {
         setTaskCardList = jest.fn();
 
         taskList = [
-            {id: "1", name: "Task1", parentTaskId: "", childrenTaskIdList: ["2"]},
-            {id: "2", name: "Task2", parentTaskId: "1", childrenTaskIdList: ["3"]},
-            {id: "3", name: "Task3", parentTaskId: "2", childrenTaskIdList: []}
+            {id: "1", name: "Task1", parentTaskId: "", childrenTaskIdList: ["2"],color: "white"},
+            {id: "2", name: "Task2", parentTaskId: "1", childrenTaskIdList: ["3"],color: "white"},
+            {id: "3", name: "Task3", parentTaskId: "2", childrenTaskIdList: [],color: "white"}
         ];
 
         setTaskList = jest.fn();
@@ -50,7 +50,7 @@ describe('DeleteSubTaskButton', () => {
         
         expect(setTaskList).toHaveBeenCalledWith(
             [
-                {id: "1", name: "Task1", parentTaskId: "", childrenTaskIdList: []}
+                {id: "1", name: "Task1", parentTaskId: "", childrenTaskIdList: [],color: "white"}
             ]
         );
 

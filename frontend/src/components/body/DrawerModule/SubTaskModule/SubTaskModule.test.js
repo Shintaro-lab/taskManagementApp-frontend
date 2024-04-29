@@ -11,9 +11,9 @@ describe("SubTaskModule", () => {
 
     beforeEach(() => {
         taskList = [
-            {id: "1", name: "Task1", parentTaskId: "", childrenTaskIdList: ["2"]},
-            {id: "2", name: "Task2", parentTaskId: "1", childrenTaskIdList: ["3"]},
-            {id: "3", name: "Task3", parentTaskId: "2", childrenTaskIdList: []}
+            {id: "1", name: "Task1", parentTaskId: "", childrenTaskIdList: ["2"], color: "white"},
+            {id: "2", name: "Task2", parentTaskId: "1", childrenTaskIdList: ["3"], color: "white"},
+            {id: "3", name: "Task3", parentTaskId: "2", childrenTaskIdList: [], color: "white"}
         ];
         setTaskList = jest.fn();
         taskCardList = [
@@ -21,7 +21,7 @@ describe("SubTaskModule", () => {
             {id: "card-2", title: "Task Card 2", taskIdList: []}
         ];
         setTaskCardList = jest.fn();
-        subTask = {id: "2", name: "Task2", parentTaskId: "1", childrenTaskIdList: ["3"]};
+        subTask = {id: "2", name: "Task2", parentTaskId: "1", childrenTaskIdList: ["3"], color: "white"};
         subTaskID = "2";
     
     });
@@ -47,9 +47,9 @@ describe("SubTaskModule", () => {
 
     expect(setTaskList).toHaveBeenCalledWith(
         [
-            {id: "1", name: "Task1", parentTaskId: "", childrenTaskIdList: ["2"]},
-            {id: "2", name: "Task2 changed", parentTaskId: "1", childrenTaskIdList: ["3"]},
-            {id: "3", name: "Task3", parentTaskId: "2", childrenTaskIdList: []}
+            {id: "1", name: "Task1", parentTaskId: "", childrenTaskIdList: ["2"], color: "white"},
+            {id: "2", name: "Task2 changed", parentTaskId: "1", childrenTaskIdList: ["3"], color: "white"},
+            {id: "3", name: "Task3", parentTaskId: "2", childrenTaskIdList: [], color: "white"}
         ]
     );
   });

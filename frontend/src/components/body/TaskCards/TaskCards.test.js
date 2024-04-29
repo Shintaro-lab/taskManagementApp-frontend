@@ -17,8 +17,8 @@ describe('TaskCards', () => {
         setTaskCardList = jest.fn();
         setOpenDrawer = jest.fn();
         taskList = [
-            {id: "1", name: "Task1",parentTaskId: "", childrenTaskIdList: []},
-            {id: "2", name: "Task2",parentTaskId: "", childrenTaskIdList: []}
+            {id: "1", name: "Task1",parentTaskId: "", childrenTaskIdList: [], color: "white"},
+            {id: "2", name: "Task2",parentTaskId: "", childrenTaskIdList: [], color: "white"}
         ];
         setTaskList = jest.fn();
         setSelectedTaskIDByOpenDrawer = jest.fn();

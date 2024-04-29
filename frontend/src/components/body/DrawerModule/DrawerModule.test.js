@@ -1,6 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { DrawerModule } from "./DrawerModule";
-import userEvent from "@testing-library/user-event";
 
 jest.mock('uuid', () => {
     return { v4: () => ('mock-uuid') };
@@ -19,9 +18,9 @@ describe('test DrawerModule', () => {
 
     beforeEach(() => {
         taskList = [
-            {id: "1", name: "Task1", parentTaskId: "", childrenTaskIdList: ["2"]},
-            {id: "2", name: "Task2", parentTaskId: "1", childrenTaskIdList: ["3"]},
-            {id: "3", name: "Task3", parentTaskId: "2", childrenTaskIdList: []}
+            {id: "1", name: "Task1", parentTaskId: "", childrenTaskIdList: ["2"], color: "white"},
+            {id: "2", name: "Task2", parentTaskId: "1", childrenTaskIdList: ["3"], color: "white"},
+            {id: "3", name: "Task3", parentTaskId: "2", childrenTaskIdList: [], color: "white"}
         ];
         setTaskList = jest.fn();
         taskCardList = [
@@ -43,6 +42,9 @@ describe('test DrawerModule', () => {
         
         const mainTask = screen.getByText('Task1');
         expect(mainTask).toBeInTheDocument();
+
+        const color = screen.getAllByRole('radio')[0];
+        expect(color).toBeInTheDocument();
         
         const Task2 = screen.getByText('Task2');
         expect(Task2).toBeInTheDocument();
@@ -66,10 +68,10 @@ describe('test DrawerModule', () => {
         fireEvent.keyDown(input, {key: 'Enter', code: 'Enter'});
 
         expect(setTaskList).toHaveBeenCalledWith([
-            {id: "1", name: "Task1", parentTaskId: "", childrenTaskIdList: ["2","mock-uuid"]},
-            {id: "2", name: "Task2", parentTaskId: "1", childrenTaskIdList: ["3"]},
-            {id: "3", name: "Task3", parentTaskId: "2", childrenTaskIdList: []},
-            {id: "mock-uuid", name: "Task4", parentTaskId: "1", childrenTaskIdList: []}
+            {id: "1", name: "Task1", parentTaskId: "", childrenTaskIdList: ["2","mock-uuid"], color: "white"},
+            {id: "2", name: "Task2", parentTaskId: "1", childrenTaskIdList: ["3"], color: "white"},
+            {id: "3", name: "Task3", parentTaskId: "2", childrenTaskIdList: [], color: "white"},
+            {id: "mock-uuid", name: "Task4", parentTaskId: "1", childrenTaskIdList: [], color: "white"}
         ]);
 
         expect(setTaskCardList).toHaveBeenCalledWith([
@@ -77,5 +79,21 @@ describe('test DrawerModule', () => {
             {id: "card-2", title: "Task Card 2", taskIdList: []}
         ]);
 
+    });
+
+    test('change color', () => {
+        render(<DrawerModule openDrawer={openDrawer} setOpenDrawer={setOpenDrawer} 
+            taskList={taskList} setTaskList={setTaskList} taskCardList={taskCardList} 
+            setTaskCardList={setTaskCardList} selectedTaskIDByOpenDrawer={selectedTaskIDByOpenDrawer} 
+            setSelectedTaskIDByOpenDrawer={setSelectedTaskIDByOpenDrawer} />);
+        
+        const color = screen.getAllByRole('radio')[1];
+        fireEvent.click(color);
+
+        expect(setTaskList).toHaveBeenCalledWith([
+            {id: "1", name: "Task1", parentTaskId: "", childrenTaskIdList: ["2"], color: "#ffef62"},
+            {id: "2", name: "Task2", parentTaskId: "1", childrenTaskIdList: ["3"], color: "white"},
+            {id: "3", name: "Task3", parentTaskId: "2", childrenTaskIdList: [], color: "white"}
+        ]);
     });
 });

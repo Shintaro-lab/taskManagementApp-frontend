@@ -34,7 +34,7 @@ export function NewTask({taskIdList, setTaskCardList, taskCardId, taskCardList, 
 
     const newTaskList = [
       ...taskList,
-      {id: id, name: event.target.children[0].value, parentTaskId: "", childrenTaskIdList: []}
+      {id: id, name: event.target.children[0].value, parentTaskId: "", childrenTaskIdList: [], color: "white"}
     ];
 
     const newTaskCardList = Array.from(taskCardList);

@@ -19,8 +19,8 @@ describe('Body', () => {
                 case 'http://localhost:8080/tm/getLatestTaskData': 
                     return Promise.resolve({
                         json: () => Promise.resolve([
-                            {id: "1", name: "Task1", parentTaskId: "", childrenTaskIdList: ["1"]},
-                            {id: "2", name: "Task2", parentTaskId: "1", childrenTaskIdList: []}
+                            {id: "1", name: "Task1", parentTaskId: "", childrenTaskIdList: ["1"], color: "white"},
+                            {id: "2", name: "Task2", parentTaskId: "1", childrenTaskIdList: [], color: "white"}
                         ])
                     });
                 case 'http://localhost:8080/tm/updateTaskCardData':

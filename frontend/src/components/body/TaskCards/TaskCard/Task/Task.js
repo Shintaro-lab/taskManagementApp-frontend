@@ -8,7 +8,6 @@ import { Typography } from "@mui/material";
 const Container = styled.div`
   display: flex;
   box-shadow: 1px 1px 1px 1px rgb(75,75,75);
-  background-color: white;
   min-height: 10vh;
   border-radius: 2%;
   position: relative;
@@ -60,7 +59,8 @@ export function Task({task,taskIdList,setTaskCardList,index,taskCardList,taskCar
           id: task.id, 
           name: event.target.value, 
           parentTaskId: task.parentTaskId, 
-          childrenTaskIdList: task.childrenTaskIdList
+          childrenTaskIdList: task.childrenTaskIdList,
+          color: task.color
         };
       }
       return taskItem;
@@ -81,6 +81,12 @@ export function Task({task,taskIdList,setTaskCardList,index,taskCardList,taskCar
             ref={provided.innerRef}
             {...provided.draggableProps}
             {...provided.dragHandleProps}
+            style={
+              {
+                ...provided.draggableProps.style
+                ,backgroundColor: task.color
+              }
+            }
           >
             {changeStatus ? (
               <form onSubmit={handleSubmit}>

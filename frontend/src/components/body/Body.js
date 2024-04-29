@@ -23,13 +23,15 @@ export default function Body() {
       id: "0",
       name: "Task1",
       parentTaskId: "",
-      childrenTaskIdList: ["1"]
+      childrenTaskIdList: ["1"],
+      color: "white"
     },
     {
       id: "1",
       name: "Task2",
       parentTaskId: "0",
-      childrenTaskIdList: []
+      childrenTaskIdList: [],
+      color: "white"
     }
   ]);
   */
@@ -42,20 +44,21 @@ export default function Body() {
     const responseForTask = await fetch('http://localhost:8080/tm/getLatestTaskData');
     const dataForTask = await responseForTask.json();
 
-    // for test
-    /*
-    const data = [
-      {
-        id: "card-1",
-        title: "TODO",
-        taskIDList: ["0","1"]
-      }
-    ];
-    */
     setTaskList(dataForTask);
 
     const responseForTaskCard = await fetch('http://localhost:8080/tm/getLatestTaskCardData');
     const dataForTaskCard = await responseForTaskCard.json();
+
+    // for test
+    /* 
+    const dataForTaskCard = [
+      {
+        id: "card-1",
+        title: "TODO",
+        taskIdList: ["0","1"]
+      }
+    ];
+    */
 
     setTaskCardList(dataForTaskCard);
     setFirstDone(true);

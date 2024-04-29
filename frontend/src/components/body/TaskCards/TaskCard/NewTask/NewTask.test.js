@@ -74,7 +74,8 @@ describe('NewTask', () => {
                     id: 'mock-uuid',
                     name: 'New Task',
                     parentTaskId: '',
-                    childrenTaskIdList: []
+                    childrenTaskIdList: [],
+                    color: 'white'
                 }
             ]
         );

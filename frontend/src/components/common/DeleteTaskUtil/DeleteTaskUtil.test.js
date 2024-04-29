@@ -14,13 +14,15 @@ describe('deleteTaskUtil Test', () => {
                 id: "0",
                 name: "Task1",
                 parentTaskId: "",
-                childrenTaskIdList: ["1"]
+                childrenTaskIdList: ["1"],
+                color: "white"
             },
             {
                 id: "1",
                 name: "Task2",
                 parentTaskId: "0",
-                childrenTaskIdList: []
+                childrenTaskIdList: [],
+                color: "white"
             }
         ];
         setTaskCardList = jest.fn();
@@ -36,7 +38,7 @@ describe('deleteTaskUtil Test', () => {
     test('deleteTaskList', () => {
 
         const result = DeleteFromTaskList(setTaskList,taskList, ["0"]);
-        expect(result).toEqual([["1"],[{id: "1", name: "Task2", parentTaskId: "0", childrenTaskIdList: []}]]);
+        expect(result).toEqual([["1"],[{id: "1", name: "Task2", parentTaskId: "0", childrenTaskIdList: [], color: "white"}]]);
     });
 
     test('DeleteFromTaskCardList', () => {

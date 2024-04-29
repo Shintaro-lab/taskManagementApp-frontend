@@ -21,7 +21,8 @@ export function SubTaskModule({subTask,subTaskID,taskList,setTaskList,taskCardLi
 
         const newTaskList = taskList.map((taskItem) => {
             if (taskItem.id === subTaskID) {
-                return {id: taskItem.id, name: event.target.value, parentTaskId: taskItem.parentTaskId, childrenTaskIdList: taskItem.childrenTaskIdList};
+                return {id: taskItem.id, name: event.target.value, parentTaskId: taskItem.parentTaskId, 
+                    childrenTaskIdList: taskItem.childrenTaskIdList, color: taskItem.color};
             }
             return taskItem;
         });

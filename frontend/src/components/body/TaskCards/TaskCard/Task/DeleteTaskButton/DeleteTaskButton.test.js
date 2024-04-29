@@ -23,9 +23,9 @@ describe('delete task button test', () => {
         setTaskCardList = jest.fn();
         taskIdList = ['task-1','task-2','task-3'];
         taskList = [
-            {id: 'task-1', name: 'task-1', parentTaskId: '', childrenTaskIdList: []},
-            {id: 'task-2', name: 'task-2', parentTaskId: '', childrenTaskIdList: []},
-            {id: 'task-3', name: 'task-3', parentTaskId: '', childrenTaskIdList: []}
+            {id: 'task-1', name: 'task-1', parentTaskId: '', childrenTaskIdList: [], color: 'white'},
+            {id: 'task-2', name: 'task-2', parentTaskId: '', childrenTaskIdList: [], color: 'white'},
+            {id: 'task-3', name: 'task-3', parentTaskId: '', childrenTaskIdList: [], color: 'white'}
         ];
         setTaskList = jest.fn();
         index = 1;
@@ -60,8 +60,8 @@ describe('delete task button test', () => {
         ]);
 
         expect(setTaskList).toHaveBeenCalledWith([
-            {id: 'task-1', name: 'task-1', parentTaskId: '', childrenTaskIdList: []},
-            {id: 'task-3', name: 'task-3', parentTaskId: '', childrenTaskIdList: []}
+            {id: 'task-1', name: 'task-1', parentTaskId: '', childrenTaskIdList: [], color: 'white'},
+            {id: 'task-3', name: 'task-3', parentTaskId: '', childrenTaskIdList: [], color: 'white'}
         ]);
     });
 });

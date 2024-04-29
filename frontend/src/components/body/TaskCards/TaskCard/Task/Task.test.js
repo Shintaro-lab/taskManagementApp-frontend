@@ -1,6 +1,6 @@
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { Task } from "./Task";
-import { act, fireEvent, render, screen} from '@testing-library/react';
+import { fireEvent, render, screen} from '@testing-library/react';
 
 describe('Task Test', () => {
     let task;
@@ -16,9 +16,9 @@ describe('Task Test', () => {
     let taskIdList;
 
     beforeEach(() => {
-        task = {id: "1", name: "Task 1", parentTaskId: "2", childrenTaskIdList: []};
-        taskList = [{id: "1", name: "Task 1", parentTaskId:"2", childrenTaskIdList:[]}, 
-            {id: "2", name: "Task 2", parentTaskId:"", childrenTaskIdList:["1"]}];
+        task = {id: "1", name: "Task 1", parentTaskId: "2", childrenTaskIdList: [], color: "white"};
+        taskList = [{id: "1", name: "Task 1", parentTaskId:"2", childrenTaskIdList:[], color: "white"}, 
+            {id: "2", name: "Task 2", parentTaskId:"", childrenTaskIdList:["1"], color: "#ed4b82"}];
         setTaskList = jest.fn();
 
         setTaskCardList = jest.fn();
@@ -64,6 +64,9 @@ describe('Task Test', () => {
 
         const openDrawerButton = screen.getByRole('button', {name: 'openDrawer'});
         expect(openDrawerButton).toBeInTheDocument();
+
+        const color = window.getComputedStyle(taskName.parentElement).backgroundColor;
+        expect(color).toEqual(task.color);
     });
 
     test('change task name with blur', async () => {
@@ -91,8 +94,8 @@ describe('Task Test', () => {
 
         expect(setTaskList).toHaveBeenCalledWith(
             [
-                {id: "1", name: "Task 1 changed", parentTaskId:"2", childrenTaskIdList:[]}, 
-                {id: "2", name: "Task 2", parentTaskId:"", childrenTaskIdList:["1"]}
+                {id: "1", name: "Task 1 changed", parentTaskId:"2", childrenTaskIdList:[], color: "white"}, 
+                {id: "2", name: "Task 2", parentTaskId:"", childrenTaskIdList:["1"], color: "#ed4b82"}
             ]
         );
         
@@ -125,8 +128,8 @@ describe('Task Test', () => {
 
         expect(setTaskList).toHaveBeenCalledWith(
             [
-                {id: "1", name: "Task 1 changed", parentTaskId:"2", childrenTaskIdList:[]}, 
-                {id: "2", name: "Task 2", parentTaskId:"", childrenTaskIdList:["1"]}
+                {id: "1", name: "Task 1 changed", parentTaskId:"2", childrenTaskIdList:[], color: "white"}, 
+                {id: "2", name: "Task 2", parentTaskId:"", childrenTaskIdList:["1"], color: "#ed4b82"}
             ]
         );
     });

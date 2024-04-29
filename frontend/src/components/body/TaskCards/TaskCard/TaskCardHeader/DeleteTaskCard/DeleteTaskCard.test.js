@@ -19,7 +19,7 @@ describe('Delete Task Card Test', () => {
         setTaskCardList = jest.fn();
         taskCardIndex = 0;
         taskList = [
-            {id: "1", name: "Task 1", parentTaskId: "", childrenTaskIdList: []}
+            {id: "1", name: "Task 1", parentTaskId: "", childrenTaskIdList: [], color: "white"}
         ];
         setTaskList = jest.fn();
     });

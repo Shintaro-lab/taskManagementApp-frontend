@@ -16,8 +16,8 @@ describe('TaskCard', () => {
 
     beforeEach(() => {
         taskList = [
-            {id: "1", name: "Task 1", parentTaskId: "", childrenTaskIdList: []},
-            {id: "2", name: "Task 2", parentTaskId: "", childrenTaskIdList: []}
+            {id: "1", name: "Task 1", parentTaskId: "", childrenTaskIdList: [], color: "white"},
+            {id: "2", name: "Task 2", parentTaskId: "", childrenTaskIdList: [], color: "white"}
         ];
         setTaskCardList = jest.fn();
         taskCardId = "card-1";
