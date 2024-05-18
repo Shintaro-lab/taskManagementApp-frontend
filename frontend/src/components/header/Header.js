@@ -1,15 +1,17 @@
 import styled from 'styled-components';
 
 const Container = styled.div`
-    text-align: center;
-    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90px;
     background-color: #A2B9C8;
 `;
 
 const H1 = styled.h1`
     color: white;
-    padding-top: 4vh;
-    font-size: 4vh;
+    white-space: nowrap;
+    font-size: 45px;
 `;
 
 export default function Header() {

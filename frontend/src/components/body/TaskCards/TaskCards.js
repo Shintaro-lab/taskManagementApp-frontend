@@ -5,6 +5,7 @@ import styled from "styled-components";
 const Container = styled.div`
   display: flex;
   gap: 5vw;
+  height: 100%;
 `;
 
 export function TaskCards({taskCardList, setTaskCardList,setOpenDrawer,taskList,setTaskList,setSelectedTaskIDByOpenDrawer}) {
@@ -92,7 +93,7 @@ export function TaskCards({taskCardList, setTaskCardList,setOpenDrawer,taskList,
                         <div
                           ref={provided.innerRef}
                           {...provided.draggableProps}
-                          {...provided.dragHandleProps}                    
+                          {...provided.dragHandleProps}               
                         >
                           <TaskCard
                             key={taskCard.id} taskCardId={taskCard.id} 

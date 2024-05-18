@@ -33,7 +33,7 @@ export function DeleteTaskButton({taskCardList,setTaskCardList,taskIdList,index,
 
   return (
     <Container>
-      <IconButton aria-label="delete" onClick={deleteTask}>
+      <IconButton aria-label="delete" onClick={deleteTask} size="small">
         <DeleteIcon />
       </IconButton>
     </Container>

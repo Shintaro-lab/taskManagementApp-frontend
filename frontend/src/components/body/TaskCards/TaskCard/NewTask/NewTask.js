@@ -1,23 +1,7 @@
-import styled from "styled-components";
 import { useState } from "react";
 
 import {v4 as uuid} from "uuid";
-
-const Container = styled.div`
-  box-shadow: 1px 1px 1px 1px rgb(75,75,75);
-  background-color: #D3D3D3;
-  height: 7vh;
-  border-radius: 2%;
-  margin-bottom: 2vh;
-`;
-
-const Input = styled.input`
-  width: 10vw;
-  border: none;
-  outline: none;
-  margin-left: 1vw;
-  margin-top: 1vh;
-`;
+import { TextField } from "@mui/material";
 
 export function NewTask({taskIdList, setTaskCardList, taskCardId, taskCardList, taskList, setTaskList}) {
 
@@ -34,7 +18,7 @@ export function NewTask({taskIdList, setTaskCardList, taskCardId, taskCardList, 
 
     const newTaskList = [
       ...taskList,
-      {id: id, name: event.target.children[0].value, parentTaskId: "", childrenTaskIdList: [], color: "white"}
+      {id: id, name: event.target.value, parentTaskId: "", childrenTaskIdList: [], color: "white"}
     ];
 
     const newTaskCardList = Array.from(taskCardList);
@@ -50,20 +34,20 @@ export function NewTask({taskIdList, setTaskCardList, taskCardId, taskCardList, 
   }
 
   function handleSubmit(event) {
-    event.preventDefault();
-    addTask(event);
+    if ((event.key === "Enter" && event.target.value !== "") || (event.type === "blur" && event.target.value !== "")) {
+      event.preventDefault();
+      addTask(event);
+    }
   }
 
   return (
-    <Container>
-      <form onSubmit={handleSubmit}>
-        <Input 
-          type="text"
-          placeholder="Add a new task"
-          value={newTaskName}
-          onChange={(event) => setNewTaskName(event.target.value)}
-        />
-      </form>
-    </Container>
+    <TextField label="Add a new Task" variant="outlined"
+        margin="normal" fullWidth
+        value={newTaskName}
+        onChange={(event) => setNewTaskName(event.target.value)}
+        onKeyDown={handleSubmit}
+        onBlur={handleSubmit}
+        sx={{backgroundColor: "white"}}
+      />
   );
 }

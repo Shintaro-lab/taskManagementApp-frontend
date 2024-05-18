@@ -5,14 +5,14 @@ import styled from "styled-components";
 import {Droppable} from "react-beautiful-dnd";
 
 const Container = styled.div`
-  background-color: white;
-  width: 15vw;
-  height: 70vh;
+  background-color: #F1F2F4;
+  width: 250px;
+  border-radius: 10px;
 `;
 
 const DroppableContainer = styled.div`
-  background-color: gray;
-  height: 70vh;
+  background-color: #F1F2F4;
+  height: 60vh;
   overflow-y: auto;
 `;
 

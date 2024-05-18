@@ -39,7 +39,7 @@ describe('NewTask', () => {
     test('renders input area',() => {
         render(<NewTask taskCardId={taskCardId} taskCardList={taskCardList} setTaskCardList={setTaskCardList}
             taskList={taskList} setTaskList={setTaskList} taskIdList={taskIdList} />);
-        const input = screen.getByPlaceholderText('Add a new task');
+        const input = screen.getByRole('textbox');
         expect(input).toBeInTheDocument();
     });
 
@@ -48,10 +48,8 @@ describe('NewTask', () => {
             taskList={taskList} setTaskList={setTaskList} taskIdList={taskIdList} />);
         
         const input = screen.getByRole('textbox');
-
-        await user.type(input, 'New Task');
-        const form = input.closest('form');
-        fireEvent.submit(form);
+        fireEvent.change(input, {target: {value: 'New Task'}});
+        fireEvent.keyDown(input, {key: 'Enter', code: 'Enter'});
 
         expect(setTaskCardList).toHaveBeenCalledWith(
             [

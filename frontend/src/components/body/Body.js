@@ -7,8 +7,12 @@ import { DrawerModule } from "./DrawerModule/DrawerModule";
 const Container = styled.div`
     display: flex;
     gap: 5vw;
-    margin-left: 5vw;
-    margin-top: 2vh;
+    padding-left: 60px;
+    padding-top: 20px;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    overflow-x: auto;
 `;
 
 export default function Body() {
@@ -103,7 +107,7 @@ export default function Body() {
     },[taskList]);
 
   return (
-    <div>
+    <div style={{position: 'relative',flexGrow: '1'}}>
       <Container>
           <TaskCards taskCardList={taskCardList} setTaskCardList={setTaskCardList} 
             taskList={taskList} setTaskList={setTaskList} 

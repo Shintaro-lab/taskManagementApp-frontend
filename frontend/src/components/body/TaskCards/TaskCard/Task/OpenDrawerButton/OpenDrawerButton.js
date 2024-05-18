@@ -17,7 +17,7 @@ export function OpenDrawerButton({setOpenDrawer,setSelectedTaskIDByOpenDrawer,ta
 
   return (
     <Container>
-      <IconButton aria-label="openDrawer" onClick={handleClick}>
+      <IconButton aria-label="openDrawer" onClick={handleClick} size="small">
         <MoreHorizIcon />
       </IconButton>
     </Container>

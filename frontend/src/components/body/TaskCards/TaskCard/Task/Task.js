@@ -8,7 +8,7 @@ import { Typography } from "@mui/material";
 const Container = styled.div`
   display: flex;
   box-shadow: 1px 1px 1px 1px rgb(75,75,75);
-  min-height: 10vh;
+  min-height: 60px;
   border-radius: 2%;
   position: relative;
   margin-bottom: 0.5vh;
