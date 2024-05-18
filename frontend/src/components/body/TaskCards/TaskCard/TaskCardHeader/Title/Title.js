@@ -8,7 +8,7 @@ const Container = styled.div`
 `;
 
 const Input = styled.input`
-  width: 240px;
+  width: 200px;
   border: none;
   outline: none;
 `;
