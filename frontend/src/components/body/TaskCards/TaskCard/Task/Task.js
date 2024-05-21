@@ -11,20 +11,21 @@ const Container = styled.div`
   min-height: 60px;
   border-radius: 2%;
   position: relative;
-  margin-bottom: 0.5vh;
+  margin-bottom: 5px;
 `;
 
 const TaskContainer = styled.p`
-  margin-left: 1vw;
-  margin-top: 1vh;
-  width: 11vw;
+  margin-left: 15px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  width: 200px;
   overflow-wrap: anywhere;
 `;
 
 const Input = styled.input`
-  margin-left: 1vw;
-  margin-top: 1vh;
-  width: 12vw;
+  margin-left: 15px;
+  margin-top: 10px;
+  width: 200px;
   overflow-wrap: anywhere;
   border: none;
   outline: none;
@@ -33,9 +34,9 @@ const Input = styled.input`
 const StyledTypography = styled(Typography)`
   color: gray;
   position: absolute;
-  bottom: 1vh;
-  left: 1vw;
-  width: 11vw;
+  bottom: 10px;
+  left: 15px;
+  width: 200px;
   overflow-wrap: anywhere;
 `;
 
