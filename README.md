@@ -82,3 +82,8 @@ electronを利用して、デスクトップアプリケーションをビルド
 
 ## ライセンス
 apache-2.0ライセンスの下で公開されています。詳細については、[LICENSE](./LICENSE)を参照してください。
+
+## アプリ自体の利用方法
+以下のURLに説明書を記載しています。
+
+https://shintaro-lab.hatenablog.com/entry/2024/05/19/001305
