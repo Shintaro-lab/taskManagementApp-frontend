@@ -2,48 +2,64 @@ import { DeleteTaskCard } from "./DeleteTaskCard";
 import { render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-describe('Delete Task Card Test', () => {
+describe('DeleteTaskCard Component Tests', () => {
     let taskCardList;
-    let setTaskCardList;
-    let taskCardIndex;
-    let taskList;
-    let setTaskList;
-
+    let setDeleteTarget;
+    let setIsDeleteModalOpen;
+    let setDeleteTaskCard;
     const user = userEvent.setup();
 
     beforeEach(() => {
         taskCardList = [
-            {id: "1", title: "Task Card 1", taskIdList: ["1"]},
+            {id: "1", title: "Task Card 1", taskIdList: ["1", "2"]},
             {id: "2", title: "Task Card 2", taskIdList: []}
         ];
-        setTaskCardList = jest.fn();
-        taskCardIndex = 0;
-        taskList = [
-            {id: "1", name: "Task 1", parentTaskId: "", childrenTaskIdList: [], color: "white"}
-        ];
-        setTaskList = jest.fn();
+        setDeleteTarget = jest.fn();
+        setIsDeleteModalOpen = jest.fn();
+        setDeleteTaskCard = jest.fn();
     });
 
-    test('render delete task card', () => {
-        render(<DeleteTaskCard taskCardIndex={taskCardIndex} 
-            taskCardList={taskCardList} setTaskCardList={setTaskCardList} taskList={taskList} setTaskList={setTaskList}/>);
-        
-        const deleteTaskCardButton = screen.getByRole('button', {name: 'delete'});
-        expect(deleteTaskCardButton).toBeInTheDocument();
+    test('renders DeleteTaskCard component', () => {
+        render(<DeleteTaskCard taskCardList={taskCardList} taskCardIndex={0} 
+            setDeleteTarget={setDeleteTarget} setIsDeleteModalOpen={setIsDeleteModalOpen} 
+            setDeleteTaskCard={setDeleteTaskCard}/>);
+
+        const deleteButton = screen.getByRole('button', {name: /delete/i});
+        expect(deleteButton).toBeInTheDocument();
     });
 
-    test('delete task card', async () => {
-        render(<DeleteTaskCard taskCardIndex={taskCardIndex} 
-            taskCardList={taskCardList} setTaskCardList={setTaskCardList} taskList={taskList} setTaskList={setTaskList}/>);
-        
-        const deleteTaskCardButton = screen.getByRole('button', {name: 'delete'});
+    test('clicking delete button calls setDeleteTarget with correct arguments', async () => {
+        render(<DeleteTaskCard taskCardList={taskCardList} taskCardIndex={0} 
+            setDeleteTarget={setDeleteTarget} setIsDeleteModalOpen={setIsDeleteModalOpen} 
+            setDeleteTaskCard={setDeleteTaskCard}/>);
 
-        await user.click(deleteTaskCardButton);
-        
-        expect(setTaskCardList).toHaveBeenCalledWith(
-            [
-                {id: "2", title: "Task Card 2", taskIdList: []}
-            ]
-        );
+        const deleteButton = screen.getByRole('button', {name: /delete/i});
+        await user.click(deleteButton);
+
+        expect(setDeleteTarget).toHaveBeenCalledWith(["1", "2"]);
+    });
+
+    test('clicking delete button sets modal open', async () => {
+        render(<DeleteTaskCard taskCardList={taskCardList} taskCardIndex={0} 
+            setDeleteTarget={setDeleteTarget} setIsDeleteModalOpen={setIsDeleteModalOpen} 
+            setDeleteTaskCard={setDeleteTaskCard}/>);
+
+        const deleteButton = screen.getByRole('button', {name: /delete/i});
+        await user.click(deleteButton);
+
+        expect(setIsDeleteModalOpen).toHaveBeenCalledWith(true);
+    });
+
+    test('clicking delete button updates task card list correctly', async () => {
+        render(<DeleteTaskCard taskCardList={taskCardList} taskCardIndex={0} 
+            setDeleteTarget={setDeleteTarget} setIsDeleteModalOpen={setIsDeleteModalOpen} 
+            setDeleteTaskCard={setDeleteTaskCard}/>);
+
+        const deleteButton = screen.getByRole('button', {name: /delete/i});
+        await user.click(deleteButton);
+
+        expect(setDeleteTaskCard).toHaveBeenCalledWith([
+            {id: "2", title: "Task Card 2", taskIdList: []}
+        ]);
     });
 });

@@ -29,7 +29,7 @@ const RadioGroupContainer = styled(RadioGroup)`
 `;
 
 export function DrawerModule({openDrawer,setOpenDrawer,taskList,setTaskList,taskCardList,
-    setTaskCardList,selectedTaskIDByOpenDrawer,setSelectedTaskIDByOpenDrawer}) {
+    setTaskCardList,selectedTaskIDByOpenDrawer,setSelectedTaskIDByOpenDrawer,setDeleteTarget,setIsDeleteModalOpen}) {
 
     const [inputValue,setInputValue] = useState("");
 
@@ -137,6 +137,7 @@ export function DrawerModule({openDrawer,setOpenDrawer,taskList,setTaskList,task
                                     subTasks={subTasks} subTaskID={subTask.id} taskList={taskList} 
                                     setTaskList={setTaskList} selectedTaskIDByOpenDrawer={selectedTaskIDByOpenDrawer}
                                     taskCardList={taskCardList} setTaskCardList={setTaskCardList}
+                                    setDeleteTarget={setDeleteTarget} setIsDeleteModalOpen={setIsDeleteModalOpen}
                                 />
                             );
                         })}

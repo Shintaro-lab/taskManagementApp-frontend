@@ -8,7 +8,8 @@ const Container = styled.div`
   height: 100%;
 `;
 
-export function TaskCards({taskCardList, setTaskCardList,setOpenDrawer,taskList,setTaskList,setSelectedTaskIDByOpenDrawer}) {
+export function TaskCards({taskCardList, setTaskCardList,setOpenDrawer,taskList,setTaskList,setSelectedTaskIDByOpenDrawer,
+  setDeleteTarget,setIsDeleteModalOpen,setDeleteTaskCard}) {
 
   const handleOnDragEnd = (result) => {
 
@@ -99,7 +100,8 @@ export function TaskCards({taskCardList, setTaskCardList,setOpenDrawer,taskList,
                             key={taskCard.id} taskCardId={taskCard.id} 
                             taskIdList={taskCard.taskIdList} setTaskCardList={setTaskCardList} taskCardList={taskCardList} 
                             taskCardIndex={index} setOpenDrawer={setOpenDrawer} taskList={taskList} setTaskList={setTaskList}
-                            setSelectedTaskIDByOpenDrawer={setSelectedTaskIDByOpenDrawer}
+                            setSelectedTaskIDByOpenDrawer={setSelectedTaskIDByOpenDrawer} setDeleteTarget={setDeleteTarget}
+                            setIsDeleteModalOpen={setIsDeleteModalOpen} setDeleteTaskCard={setDeleteTaskCard}
                           />
                         </div>
                       );

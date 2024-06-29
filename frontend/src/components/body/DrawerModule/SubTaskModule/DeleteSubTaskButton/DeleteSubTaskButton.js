@@ -1,24 +1,16 @@
 import { IconButton } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
-import { DeleteFromTaskCardList, DeleteFromTaskList } from "../../../../common/DeleteTaskUtil/DeleteTaskUtil";
 
-export function DeleteSubTaskButton({subTaskID,taskList,setTaskList,
-    taskCardList,setTaskCardList}) {
+export function DeleteSubTaskButton({subTaskID,setDeleteTarget,setIsDeleteModalOpen}) {
 
     const deleteSubTask = () => {
 
         let bufferList = [];
-        let deletedList = [];
 
         bufferList = [...bufferList,subTaskID];
 
-        while (bufferList.length > 0) {
-
-            deletedList = [...deletedList,...bufferList];
-            [bufferList,taskList] = DeleteFromTaskList(setTaskList,taskList,bufferList);
-        }
-      
-        DeleteFromTaskCardList(setTaskCardList,taskCardList,deletedList);
+        setDeleteTarget(bufferList);
+        setIsDeleteModalOpen(true);
 
     }
 

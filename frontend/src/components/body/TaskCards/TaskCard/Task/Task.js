@@ -41,7 +41,7 @@ const StyledTypography = styled(Typography)`
 `;
 
 export function Task({task,taskIdList,setTaskCardList,index,taskCardList,taskCardId,setOpenDrawer,
-  taskList,setTaskList,setSelectedTaskIDByOpenDrawer,parentTaskName}) {
+  taskList,setTaskList,setSelectedTaskIDByOpenDrawer,parentTaskName,setDeleteTarget,setIsDeleteModalOpen}) {
   const [changeStatus, setChangeStatus] = useState(false);
 
   const handleSubmit = (event) => {
@@ -105,7 +105,9 @@ export function Task({task,taskIdList,setTaskCardList,index,taskCardList,taskCar
               taskID={task.id}
             />
             <DeleteTaskButton taskCardList={taskCardList} setTaskCardList={setTaskCardList} 
-              taskCardId={taskCardId} taskIdList={taskIdList} index={index} taskList={taskList} setTaskList={setTaskList}/>
+              taskCardId={taskCardId} taskIdList={taskIdList} index={index} taskList={taskList} setTaskList={setTaskList}
+              setDeleteTarget={setDeleteTarget} setIsDeleteModalOpen={setIsDeleteModalOpen}
+            />
             {parentTaskName !== "" ? (
               <StyledTypography variant="string" component="p">
                 {parentTaskName}

@@ -17,12 +17,13 @@ const DroppableContainer = styled.div`
 `;
 
 export function TaskCard({taskIdList,setTaskCardList,taskCardId,taskCardList,taskCardIndex,setOpenDrawer,
-  taskList,setTaskList,setSelectedTaskIDByOpenDrawer}) {
+  taskList,setTaskList,setSelectedTaskIDByOpenDrawer,setDeleteTarget,setIsDeleteModalOpen,setDeleteTaskCard}) {
 
   return (
     <Container>
       <TaskCardHeader taskCardList={taskCardList} setTaskCardList={setTaskCardList} taskCardId={taskCardId} 
-        taskCardIndex={taskCardIndex} taskList={taskList} setTaskList={setTaskList}/>
+        taskCardIndex={taskCardIndex} taskList={taskList} setTaskList={setTaskList} 
+        setDeleteTarget={setDeleteTarget} setIsDeleteModalOpen={setIsDeleteModalOpen} setDeleteTaskCard={setDeleteTaskCard}/>
       <NewTask taskIdList={taskIdList} setTaskCardList={setTaskCardList} taskCardId={taskCardId} 
         taskCardList={taskCardList} taskList={taskList} setTaskList={setTaskList}/>
       <Droppable droppableId={taskCardId}>
@@ -44,6 +45,7 @@ export function TaskCard({taskIdList,setTaskCardList,taskCardId,taskCardList,tas
                     setTaskCardList={setTaskCardList} index={index} taskCardList={taskCardList}
                     taskCardId={taskCardId} setOpenDrawer={setOpenDrawer} taskList={taskList} setTaskList={setTaskList}
                     setSelectedTaskIDByOpenDrawer={setSelectedTaskIDByOpenDrawer} parentTaskName={parentTaskName}
+                    setDeleteTarget={setDeleteTarget} setIsDeleteModalOpen={setIsDeleteModalOpen}
                   />
                 );
               })}

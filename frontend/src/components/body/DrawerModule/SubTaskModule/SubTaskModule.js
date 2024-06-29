@@ -12,7 +12,7 @@ const StyledListItem = styled(ListItem).attrs({
 `;
 
 
-export function SubTaskModule({subTask,subTaskID,taskList,setTaskList,taskCardList,setTaskCardList}) {
+export function SubTaskModule({subTask,subTaskID,taskList,setTaskList,taskCardList,setTaskCardList,setDeleteTarget,setIsDeleteModalOpen}) {
     const [changeStatus, setChangeStatus] = useState(false);
 
     const handleSubmit = (event) => {
@@ -47,7 +47,8 @@ export function SubTaskModule({subTask,subTaskID,taskList,setTaskList,taskCardLi
                 <StyledListItem>
                     <ListItemText primary={subTask.name} onClick={() => setChangeStatus(true)}/>
                     <DeleteSubTaskButton subTaskID={subTask.id} taskList={taskList} setTaskList={setTaskList}
-                        taskCardList={taskCardList} setTaskCardList={setTaskCardList}
+                        taskCardList={taskCardList} setTaskCardList={setTaskCardList} 
+                        setDeleteTarget={setDeleteTarget} setIsDeleteModalOpen={setIsDeleteModalOpen}
                     />
                 </StyledListItem>
                 }
