@@ -1,70 +1,79 @@
-# Getting Started with Create React App
+# taskManagementApp-frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+taskManagementApp-frontendは、タスク管理を簡単に行うことができるフロントエンドアプリケーションです。
+Reactとelectronを使用しており、直感的なUIでタスクの追加、編集、削除が可能です。
+ローカルに全てのデータを保存するため、個人的なデータを安全に管理することができます。
 
-## Available Scripts
+## プロジェクトの構成
 
-In the project directory, you can run:
+このプロジェクトは、以下の主要なディレクトリとファイルから構成されています。
 
+- `src/`: ソースコードが含まれています。
+  - `App.js`: アプリケーションのメインコンポーネントです。
+  - `components/`: UIコンポーネントが格納されています。
+    - `body/`: アプリケーションのメインコンテンツ部分のコンポーネントがあります。
+      - `TaskCards/`: タスクカード群を表示するためのコンポーネント群です。
+        - `TaskCard/`: 個々のタスクカードを表すコンポーネントがあります。
+          - `Task/`: タスクの詳細を表示するコンポーネントです。
+          - `NewTask/`: 新しいタスクを追加するためのコンポーネントです。
+        - `TaskCardHeader/`: タスクカードのヘッダー部分を表すコンポーネントがあります。
+          - `DeleteTaskCard/`: タスクカードを削除するためのコンポーネントです。
+          - `TaskCardHeader.js`: タスクカードのヘッダー部分のコンポーネントです。
+      - `AddTaskCardsButton/`: タスクカードを追加するためのボタンを表すコンポーネントです。
+      - `DeleteModal/`: 削除処理時に確認を促すためのポップアップのために利用しているコンポーネントです。
+      - `DrawerModule/`: サイドバーのコンポーネントです。
+    - `common/`: 共通処理を格納しています。
+      - `DeleteTaskUtil.js`: タスクを削除するためのユーティリティコンポーネントです。
+    - `header/`: アプリケーションのヘッダー部分のコンポーネントがあります。
+- `public/`: electronの画面表示に必要なファイルが格納されています。
+- `README.md`: プロジェクトの使用方法や構成について説明しています。
+
+## 自動テスト
+Jest及びhuskyを利用して、コミット時に自動テストを実行するように設定しています。
+改修時は以下を実施してください。
+
+* テストを追加して、問題がないことを確認してください。
+* テストを実行して、問題がないことを確認してください。
+
+## 開発に参加する
+
+このプロジェクトはオープンソースであり、コミュニティからの貢献を歓迎します。以下の手順に従って開発に参加してください。
+
+1. プロジェクトをフォークし、自分のリポジトリにコピーします。
+   ※注意：このプロジェクトはデータ保存をtaskManagementApp-backendに依存しています。
+   taskManagementApp-backendもフォークし自分のリポジトリにコピー&ビルドするか、taskManagementApp-productをローカルにダウンロードしてください。
+
+2. 必要な依存関係をインストールします。プロジェクトのルートディレクトリで以下のコマンドを実行してください。
+
+```
+cd frontend
+npm install
+```
+3. 1で実施した手順に応じて、以下を実行してください。
+- taskManagementApp-productを利用する場合、taskManagementApp-productのtm.exeを起動してください
+※8080番ポートを利用し、databaseフォルダ内にデータが保存されます。
+
+- taskManagementApp-backendを利用する場合、taskManagementApp-backendに移動し以下のコマンドを実行してください。
+```
+mvn -Pnative native:compile
+tm.exeを起動してください。
+```
+
+1. 開発サーバーを起動します。以下のコマンドを実行してください。
+
+```
+npm start
+```
+
+## 利用可能なスクリプト
 ### `npm start`
+reactを起動します。[http://localhost:3000](http://localhost:3000)でアプリケーションを開くことができます。
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### `npm run test`
+Jestを利用して、テストを実行します。
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### `num run build-app`
+electronを利用して、デスクトップアプリケーションをビルドします。distに結果が格納されます。
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## ライセンス
+apache-2.0ライセンスの下で公開されています。詳細については、[LICENSE](../LICENSE)を参照してください。
